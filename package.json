@@ -4,15 +4,23 @@
   "description": "MEAN Stack Address Book",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config webpack.config.js -w -v"
   },
-  "author": "Colin J. Ihrig <cjihrig@gmail.com> (http://www.cjihrig.com/)",
+  "author": "Continuation Labs (http://continuation.io/)",
   "license": "MIT",
   "dependencies": {
     "angular": "1.4.x",
+    "babel-core": "5.6.x",
+    "babel-loader": "5.3.x",
+    "babel-runtime": "5.6.x",
     "body-parser": "1.13.x",
+    "css-loader": "0.15.4",
     "express": "4.13.x",
-    "mongodb": "2.0.x"
+    "minimist": "1.1.x",
+    "mongodb": "2.0.x",
+    "stylus-loader": "1.2.x",
+    "webpack": "1.10.x"
   },
   "devDependencies": {
     "code": "1.4.x",

@@ -7,7 +7,7 @@ lib.init(function(err, app) {
     process.exit(1);
   }
 
-  var server = app.listen(3000, function() {
+  var server = app.listen(8001, function() {
     var address = server.address();
     var host = address.address;
     var port = address.port;
