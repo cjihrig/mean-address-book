@@ -1,4 +1,12 @@
-require('../style/main');
-const Angular = require('angular');
+const angular = require('angular');
+const templates = require('./templates');
 
-module.exports = Angular.module('mean-address-book', []);
+const App = angular.module('App', [require('angular-route'), 'List']);
+
+App.config(['$routeProvider', function ($routeProvider) {
+  $routeProvider.when('/', {
+    template: templates.list,
+    controller: 'ListController',
+    controllerAs: 'list'
+  });
+}]);
