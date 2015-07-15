@@ -1,0 +1,22 @@
+{
+  "name": "mean-address-book",
+  "version": "1.0.0",
+  "description": "MEAN Stack Address Book",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Colin J. Ihrig <cjihrig@gmail.com> (http://www.cjihrig.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "1.4.x",
+    "body-parser": "1.13.x",
+    "express": "4.13.x",
+    "mongodb": "2.0.x"
+  },
+  "devDependencies": {
+    "code": "1.4.x",
+    "lab": "5.13.x",
+    "wreck": "6.0.x"
+  }
+}
