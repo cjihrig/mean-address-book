@@ -36,10 +36,13 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader'
+    }, {
+      test: /\.html$/,
+      loader: 'html?attrs=false&minimize=true'
     }]
   },
   resolve: {
-    extensions: ['', '.js', '.css'],
+    extensions: ['', '.js', '.css', '.html'],
     modulesDirectories: ['node_modules']
   },
   plugins: plugs
