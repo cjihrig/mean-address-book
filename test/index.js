@@ -58,7 +58,7 @@ describe('API', function() {
         return done(err);
       }
 
-      server = app.listen(3000, function() {
+      server = app.listen(0, function() {
         var port = server.address().port;
 
         url = 'http://localhost:' + port;
