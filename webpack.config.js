@@ -4,6 +4,8 @@ var Path = require('path');
 var Webpack = require('webpack');
 var Minimist = require('minimist');
 
+var ngPath = Path.join(process.cwd() + 'node_modules', 'angular');
+
 var plugs = [
   new Webpack.optimize.DedupePlugin()
 ];
@@ -26,9 +28,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    noParse: [
-      Path.join(process.cwd() + 'node_modules', 'angular')
-    ],
+    noParse: [ngPath],
     loaders: [{
       test: /\.js$/,
       include: [
@@ -42,6 +42,9 @@ module.exports = {
     }, {
       test: /\.html$/,
       loader: 'html?attrs=false&minimize=true'
+    }, {
+      test: ngPath,
+      loader: 'exports?angular'
     }]
   },
   resolve: {

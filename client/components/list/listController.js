@@ -1,7 +1,7 @@
 const angular = require('angular');
 
 const ListController = class ListController {
-  constructor ($route, $timeout, $document, AddressService, MessagingService) {
+  constructor ($route, $timeout, AddressService, MessagingService) {
     this.$route = $route;
     this.$timeout = $timeout;
     this.addressService = AddressService;
@@ -16,8 +16,8 @@ const ListController = class ListController {
     });
   }
 };
-// Keep the code from breaking during minification
-ListController.$inject = ['$route', '$timeout', '$document', 'AddressService', 'MessagingService'];
+
+ListController.$inject = ['$route', '$timeout', 'AddressService', 'MessagingService'];
 
 angular.module('ListModule', []).controller('ListController', ListController);
 module.exports = ListController;
