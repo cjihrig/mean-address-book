@@ -4,10 +4,10 @@
   "description": "MEAN Stack Address Book",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "lab -v -a code -t 100",
     "webpack": "webpack --config webpack.config.js -w -v"
   },
-  "author": "Continuation Labs (http://continuation.io/)",
+  "author": "Continuation Labs <contact@continuation.io> (http://continuation.io/)",
   "license": "MIT",
   "dependencies": {
     "angular": "1.4.3",
