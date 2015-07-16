@@ -20,6 +20,16 @@ var address = {
   zip: '15234'
 };
 
+var address2 = {
+  firstName: 'Pete',
+  lastName: 'Peterson',
+  addressLineOne: '789 Xyz Avenue',
+  addressLineTwo: '',
+  city: 'San Diego',
+  state: 'CA',
+  zip: '92118'
+};
+
 function create(url, address, callback) {
   Wreck.post(url, {
     headers: { 'Content-Type': 'application/json' },
@@ -94,15 +104,6 @@ describe('API', function() {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
 
-        var address2 = {
-          firstName: 'Pete',
-          lastName: 'Peterson',
-          addressLineOne: '789 Xyz Avenue',
-          city: 'San Diego',
-          state: 'CA',
-          zip: '92118'
-        };
-
         create(resource, address2, function(err, response, created2) {
           expect(err).to.not.exist();
           expect(response.statusCode).to.equal(201);
@@ -154,10 +155,17 @@ describe('API', function() {
 
         var resource = url + response.headers.location;
 
-        update(resource, function(err, response, body) {
+        update(resource, address2, function(err, response, body) {
           expect(err).to.not.exist();
           expect(response.statusCode).to.equal(200);
-          done();
+
+          get(resource, function(err, response, body) {
+            expect(err).to.not.exist();
+            expect(response.statusCode).to.equal(200);
+            delete body._id;
+            expect(body).to.deep.equal(address2);
+            done();
+          });
         });
       });
     });
