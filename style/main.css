@@ -1,3 +1,12 @@
-body {
-  background-color: red
+div.address-container p {
+  margin: 0;
+}
+
+div.address-container h3 {
+  margin-top: 7px;
+}
+
+
+@media screen and (max-width:768px) {
+
 }

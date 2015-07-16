@@ -1,0 +1,27 @@
+<div class="page-header">
+  <h1>Contacts <span class="badge">{{list.addressService.addresses.length}}</span></h1>
+</div>
+<div>
+  <div ng-repeat="item in list.addressService.addresses track by item._id">
+    <div class="panel panel-default address-container">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-md-9 col-xs-6">
+            <h3 class="panel-title centering">{{item.firstName + ' ' + item.lastName}}</h3>
+          </div>
+          <div class="col-md-3 col-xs-6 text-right">
+            <div class="btn-group list-action-btn-group">
+              <a class="btn btn-default btn-primary glyphicon glyphicon-pencil"></a>
+              <a class="btn btn-default btn-danger glyphicon glyphicon-trash"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-body">
+        <p>{{item.addressLineOne}}</p>
+        <p>{{item.addressLineTwo}}</p>
+        <p>{{item.city + ' ' + item.state + ', ' + item.zip}}</p>
+      </div>
+    </div>
+  </div>
+</div>
