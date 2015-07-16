@@ -4,6 +4,8 @@ var Path = require('path');
 var Webpack = require('webpack');
 var Minimist = require('minimist');
 
+var ngPath = Path.join(process.cwd() + 'node_modules', 'angular');
+
 var plugs = [
   new Webpack.optimize.DedupePlugin()
 ];
@@ -19,13 +21,14 @@ if (args.prod) {
 
 module.exports = {
   entry: {
-    main: ['./client/main.js']
+    main: ['babel/polyfill', './client/main.js']
   },
   output: {
     path: './public',
     filename: 'bundle.js',
   },
   module: {
+    noParse: [ngPath],
     loaders: [{
       test: /\.js$/,
       include: [
@@ -39,6 +42,9 @@ module.exports = {
     }, {
       test: /\.html$/,
       loader: 'html?attrs=false&minimize=true'
+    }, {
+      test: ngPath,
+      loader: 'exports?angular'
     }]
   },
   resolve: {
