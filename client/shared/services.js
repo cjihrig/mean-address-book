@@ -16,7 +16,7 @@ const AddressService = class AddressService {
       this.deletedAddress = result.data;
       // The delete was successful, so remove the item from the collection of elements
       const index = this.addressList.findIndex((item) => item._id === id);
-      if (index != -1) {
+      if (index !== -1) {
         this.addressList.splice(index, 1);
       }
     });
