@@ -1,12 +1,24 @@
 const angular = require('angular');
 
+const Services = angular.module('Services', []);
 const AddressService = class AddressService {
   constructor($http) {
     this.$http = $http;
+    this.addressList = [];
   }
   get(id = '') {
     return this.$http.get(`/address/${id}`).then((result) => {
-      this.addresses = result.data.addresses;
+      this.addressList = result.data.addresses;
+    });
+  }
+  delete(id) {
+    return this.$http.delete(`/address/${id}`).then((result) => {
+      this.deletedAddress = result.data;
+      // The delete was successful, so remove the item from the collection of elements
+      const index = this.addressList.findIndex((item) => item._id === id);
+      if (index != -1) {
+        this.addressList.splice(index, 1);
+      }
     });
   }
   static AddressServiceFactory ($http) {
@@ -17,4 +29,29 @@ const AddressService = class AddressService {
 }
 AddressService.AddressServiceFactory.$inject = ['$http'];
 
-angular.module('Services', []).service('AddressService', AddressService.AddressServiceFactory);
+Services.service('AddressService', AddressService.AddressServiceFactory);
+
+const MessagingService = class MessagingService {
+  constructor() {
+    this.error = '';
+    this.message = '';
+  }
+  _write(destination, message) {
+    this[destination] = message;
+  }
+  setError(message) {
+    this._write('error', message);
+  }
+  setMessage(message) {
+    this._write('message', message);
+  }
+  reset() {
+    this.error = '';
+    this.message = '';
+  }
+  static MessagingServiceFactory () {
+    return new MessagingService();
+  }
+}
+
+Services.service('MessagingService', MessagingService);

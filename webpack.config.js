@@ -19,13 +19,16 @@ if (args.prod) {
 
 module.exports = {
   entry: {
-    main: ['./client/main.js']
+    main: ['babel/polyfill', './client/main.js']
   },
   output: {
     path: './public',
     filename: 'bundle.js',
   },
   module: {
+    noParse: [
+      Path.join(process.cwd() + 'node_modules', 'angular')
+    ],
     loaders: [{
       test: /\.js$/,
       include: [
