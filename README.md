@@ -1,8 +1,10 @@
 # mean-address-book
 MEAN Stack Address Book
 
+[![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/Flet/semistandard)
+
 ## Doing Work
-In a new terminal tab run 
+In a new terminal tab run
 ```bash
 npm run webpack
 ```
