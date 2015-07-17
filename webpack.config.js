@@ -21,7 +21,7 @@ if (args.prod) {
 
 module.exports = {
   entry: {
-    main: ['babel/polyfill', './client/main.js']
+    main: ['babel-core/polyfill', './client/main.js']
   },
   output: {
     path: './public',
