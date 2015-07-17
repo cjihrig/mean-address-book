@@ -2,16 +2,16 @@ const angular = require('angular');
 
 const Services = angular.module('Services', []);
 const AddressService = class AddressService {
-  constructor($http) {
+  constructor ($http) {
     this.$http = $http;
     this.addressList = [];
   }
-  get(id = '') {
+  get (id = '') {
     return this.$http.get(`/address/${id}`).then((result) => {
       this.addressList = result.data.addresses;
     });
   }
-  delete(id) {
+  delete (id) {
     return this.$http.delete(`/address/${id}`).then((result) => {
       this.deletedAddress = result.data;
       // The delete was successful, so remove the item from the collection of elements
@@ -26,32 +26,33 @@ const AddressService = class AddressService {
     result.get();
     return result;
   }
-}
+};
+
 AddressService.AddressServiceFactory.$inject = ['$http'];
 
 Services.service('AddressService', AddressService.AddressServiceFactory);
 
 const MessagingService = class MessagingService {
-  constructor() {
+  constructor () {
     this.error = '';
     this.message = '';
   }
-  _write(destination, message) {
+  _write (destination, message) {
     this[destination] = message;
   }
-  setError(message) {
+  setError (message) {
     this._write('error', message);
   }
-  setMessage(message) {
+  setMessage (message) {
     this._write('message', message);
   }
-  reset() {
+  reset () {
     this.error = '';
     this.message = '';
   }
   static MessagingServiceFactory () {
     return new MessagingService();
   }
-}
+};
 
 Services.service('MessagingService', MessagingService);

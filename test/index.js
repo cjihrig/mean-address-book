@@ -30,7 +30,7 @@ var address2 = {
   zip: '92118'
 };
 
-function create(url, address, callback) {
+function create (url, address, callback) {
   Wreck.post(url, {
     headers: { 'Content-Type': 'application/json' },
     json: 'force',
@@ -38,7 +38,7 @@ function create(url, address, callback) {
   }, callback);
 }
 
-function update(url, address, callback) {
+function update (url, address, callback) {
   Wreck.put(url, {
     headers: { 'Content-Type': 'application/json' },
     json: 'force',
@@ -46,29 +46,29 @@ function update(url, address, callback) {
   }, callback);
 }
 
-function get(url, callback) {
+function get (url, callback) {
   Wreck.get(url, {
     json: 'force'
   }, callback);
 }
 
-function remove(url, callback) {
+function remove (url, callback) {
   Wreck.delete(url, {
     json: 'force'
   }, callback);
 }
 
-describe('API', function() {
+describe('API', function () {
   var server;
   var url;
 
-  lab.beforeEach(function(done) {
-    Lib.init(function(err, app) {
+  lab.beforeEach(function (done) {
+    Lib.init(function (err, app) {
       if (err) {
         return done(err);
       }
 
-      server = app.listen(0, function() {
+      server = app.listen(0, function () {
         var port = server.address().port;
 
         url = 'http://localhost:' + port;
@@ -77,15 +77,15 @@ describe('API', function() {
     });
   });
 
-  lab.afterEach(function(done) {
+  lab.afterEach(function (done) {
     server.close();
     server = null;
     done();
   });
 
-  describe('POST /address', function() {
-    it('creates a new address', function(done) {
-      create(url + '/address', address, function(err, response, body) {
+  describe('POST /address', function () {
+    it('creates a new address', function (done) {
+      create(url + '/address', address, function (err, response, body) {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
         expect(body._id).to.exist();
@@ -96,29 +96,29 @@ describe('API', function() {
     });
   });
 
-  describe('GET /address', function() {
-    it('retrieves all saved addresses', function(done) {
+  describe('GET /address', function () {
+    it('retrieves all saved addresses', function (done) {
       var resource = url + '/address';
 
-      create(resource, address, function(err, response, created) {
+      create(resource, address, function (err, response, created) {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
 
-        create(resource, address2, function(err, response, created2) {
+        create(resource, address2, function (err, response, created2) {
           expect(err).to.not.exist();
           expect(response.statusCode).to.equal(201);
 
-          get(resource, function(err, response, body) {
+          get(resource, function (err, response, body) {
             expect(err).to.not.exist();
             expect(response.statusCode).to.equal(200);
             expect(body.addresses).to.be.an.array();
 
             // Verify that the two addresses we created are in the system
-            expect(body.addresses.some(function(addr) {
+            expect(body.addresses.some(function (addr) {
               return addr._id === created._id;
             })).to.equal(true);
 
-            expect(body.addresses.some(function(addr) {
+            expect(body.addresses.some(function (addr) {
               return addr._id === created2._id;
             })).to.equal(true);
 
@@ -129,15 +129,15 @@ describe('API', function() {
     });
   });
 
-  describe('GET /address/:id', function() {
-    it('retrieves a single address', function(done) {
-      create(url + '/address', address, function(err, response, created) {
+  describe('GET /address/:id', function () {
+    it('retrieves a single address', function (done) {
+      create(url + '/address', address, function (err, response, created) {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
 
         var resource = url + response.headers.location;
 
-        get(resource, function(err, response, body) {
+        get(resource, function (err, response, body) {
           expect(err).to.not.exist();
           expect(response.statusCode).to.equal(200);
           expect(body).to.deep.equal(created);
@@ -147,19 +147,19 @@ describe('API', function() {
     });
   });
 
-  describe('PUT /address/:id', function() {
-    it('updates an existing address', function(done) {
-      create(url + '/address', address, function(err, response, created) {
+  describe('PUT /address/:id', function () {
+    it('updates an existing address', function (done) {
+      create(url + '/address', address, function (err, response, created) {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
 
         var resource = url + response.headers.location;
 
-        update(resource, address2, function(err, response, body) {
+        update(resource, address2, function (err, response, body) {
           expect(err).to.not.exist();
           expect(response.statusCode).to.equal(200);
 
-          get(resource, function(err, response, body) {
+          get(resource, function (err, response, body) {
             expect(err).to.not.exist();
             expect(response.statusCode).to.equal(200);
             delete body._id;
@@ -171,19 +171,19 @@ describe('API', function() {
     });
   });
 
-  describe('DELETE /address/:id', function() {
-    it('deletes an existing address', function(done) {
-      create(url + '/address', address, function(err, response, created) {
+  describe('DELETE /address/:id', function () {
+    it('deletes an existing address', function (done) {
+      create(url + '/address', address, function (err, response, created) {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
 
         var resource = url + response.headers.location;
 
-        remove(resource, function(err, response, body) {
+        remove(resource, function (err, response, body) {
           expect(err).to.not.exist();
           expect(response.statusCode).to.equal(200);
           expect(body.numberRemoved).to.equal(1);
-          get(resource, function(err, response, body) {
+          get(resource, function (err, response, body) {
             expect(err).to.not.exist();
             expect(response.statusCode).to.equal(404);
             done();

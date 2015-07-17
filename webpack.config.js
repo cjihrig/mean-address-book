@@ -25,7 +25,7 @@ module.exports = {
   },
   output: {
     path: './public',
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   module: {
     noParse: [ngPath],
