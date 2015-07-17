@@ -4,7 +4,7 @@ var Path = require('path');
 var Webpack = require('webpack');
 var Minimist = require('minimist');
 
-var ngPath = Path.join(process.cwd() + 'node_modules', 'angular');
+var ngPath = Path.join(process.cwd(), 'node_modules', 'angular', 'angular.min.js');
 
 var plugs = [
   new Webpack.optimize.DedupePlugin()
@@ -21,7 +21,7 @@ if (args.prod) {
 
 module.exports = {
   entry: {
-    main: ['babel-core/polyfill', './client/main.js']
+    main: ['babel-core/polyfill', 'angular', './client/main.js']
   },
   output: {
     path: './public',
@@ -49,7 +49,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.css', '.html'],
-    modulesDirectories: ['node_modules']
+    modulesDirectories: ['node_modules'],
+    alias: {
+      'angular': ngPath
+    }
   },
   plugins: plugs
 };
