@@ -5,10 +5,16 @@ const AddressService = class AddressService {
   constructor ($http) {
     this.$http = $http;
     this.addressList = [];
+    this.address = {};
   }
   get (id = '') {
     return this.$http.get(`/address/${id}`).then((result) => {
-      this.addressList = result.data.addresses;
+      if (id) {
+        this.address = result.data;
+      }
+      else {
+        this.addressList = result.data.addresses;
+      }
     });
   }
   delete (id) {
