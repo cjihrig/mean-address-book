@@ -9,7 +9,8 @@
     "start": "node index.js",
     "test": "npm run lint && lab -v -a code",
     "test-client": "webpack && karma start",
-    "webpack": "webpack -w -v"
+    "webpack": "webpack -w -v",
+    "webpack-p": "webpack -v --prod"
   },
   "author": "Continuation Labs <contact@continuation.io> (http://continuation.io/)",
   "license": "MIT",

@@ -1,5 +1,3 @@
-const angular = require('angular');
-
 const Services = angular.module('Services', []);
 const AddressService = class AddressService {
   constructor ($http) {

@@ -1,3 +1,4 @@
+require('../../components/list/ListController');
 describe('List Controller', function () {
   var controller;
   var $q;
@@ -13,7 +14,8 @@ describe('List Controller', function () {
     }
   };
   beforeEach(function () {
-      module('App');
+      angular.mock.module('ngRoute');
+      angular.mock.module('ListModule');
       inject(function (_$rootScope_, $controller, _$q_, _$timeout_) {
         $rootScope = _$rootScope_;
         $timeout = _$timeout_;

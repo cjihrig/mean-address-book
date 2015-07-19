@@ -21,12 +21,18 @@ if (args.prod) {
 
 module.exports = {
   entry: {
-    main: ['babel-core/polyfill', 'angular', './client/main.js']
+    main: ['./client/app.js'],
+    vendor: [
+      'angular',
+      'angular-route',
+      'babel-core/polyfill'
+    ]
   },
   output: {
     path: './public',
-    filename: 'bundle.js'
+    filename: '[name]-bundle.js'
   },
+  devtool: 'source-map',
   module: {
     noParse: [ngPath],
     loaders: [{
@@ -50,9 +56,6 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.css', '.html'],
     modulesDirectories: ['node_modules'],
-    alias: {
-      'angular': ngPath
-    }
   },
   plugins: plugs
 };

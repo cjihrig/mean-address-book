@@ -1,46 +1,47 @@
 var Path = require('path');
-var ngPath = Path.join(process.cwd(), 'node_modules', 'angular', 'angular.min.js');
-
+var Node_Modules = Path.join(process.cwd(), 'node_modules');
+var ngPath = Path.join(Node_Modules, 'angular', 'angular.js');
 
 module.exports = function(config) {
   config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine', 'must'],
-    // list of files / patterns to load in the browser
     files: [
-      'public/bundle.js',
-      'node_modules/angular-mocks/angular-mocks.js',
-      'client/test/spec/*.js'
+      ngPath,
+      Path.join(Node_Modules, 'babel-core', 'browser-polyfill.min.js'),
+      Path.join(Node_Modules, 'angular-mocks', 'angular-mocks.js'),
+      Path.join(Node_Modules, 'angular-route', 'angular-route.js'),
+      'client/test/test-context.js'
     ],
-    // list of files to exclude
-    exclude: [
-    ],
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'client/test/test-context.js': ['webpack', 'sourcemap']
     },
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
-    // web server port
     port: 9876,
-    // enable / disable colors in the output (reporters and logs)
     colors: true,
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
-    // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: true,
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        noParse: [ngPath],
+        loaders: [{
+          test: /\.js$/,
+          include: [
+            Path.resolve(process.cwd(), 'client')
+          ],
+          exclude: 'node_modules',
+          loader: 'babel?optional[]=runtime'
+        }]
+      },
+      webpackMiddleware: {
+        noInfo: true
+      },
+      resolve: {
+        extensions: ['', '.js'],
+        modulesDirectories: ['node_modules']
+      },
+    }
   });
 };

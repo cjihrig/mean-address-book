@@ -1,7 +1,8 @@
-const angular = require('angular');
-const list = require('./components/list');
+require('../style/main');
+require('./shared/services');
 
-const App = angular.module('App', [require('angular-route'), 'ListModule', 'Services']);
+const list = require('./components/list');
+const App = angular.module('App', ['ngRoute', 'ListModule', 'Services']);
 
 App.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/', {

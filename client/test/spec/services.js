@@ -1,6 +1,7 @@
+require('../../shared/services');
 describe('Services', function () {
   beforeEach(function () {
-    module('Services');
+    angular.mock.module('Services');
   });
 
   var MessagingService
