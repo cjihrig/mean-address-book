@@ -1,3 +1,4 @@
+var expect = require('must-dist');
 require('../../shared/services');
 describe('Services', function () {
   beforeEach(function () {
@@ -14,16 +15,16 @@ describe('Services', function () {
 
     it('has methods to set error and message', function () {
       MessagingService.setError('mock error');
-      Must(MessagingService.error).to.equal('mock error');
+      expect(MessagingService.error).to.equal('mock error');
       MessagingService.setMessage('mock message');
-      Must(MessagingService.message).to.equal('mock message');
+      expect(MessagingService.message).to.equal('mock message');
     });
     it('reset() clears all of the message information', function () {
       MessagingService.setError('mock error');
       MessagingService.setMessage('mock message');
       MessagingService.reset();
-      Must(MessagingService.message).to.equal('');
-      Must(MessagingService.error).to.equal('');
+      expect(MessagingService.message).to.equal('');
+      expect(MessagingService.error).to.equal('');
     });
   });
   describe('AddressService', function () {
@@ -36,7 +37,7 @@ describe('Services', function () {
             addresses: [{ _id: 0 }, { _id: 1 }]
           });
           $httpBackend.flush();
-          Must(AddressService.addressList).to.eql([{ _id: 0 }, { _id: 1 }]);
+          expect(AddressService.addressList).to.eql([{ _id: 0 }, { _id: 1 }]);
       });
     });
     describe('delete()', function () {
@@ -47,8 +48,8 @@ describe('Services', function () {
         AddressService.delete(1);
         $httpBackend.flush();
 
-        Must(AddressService.addressList.length).to.be(1);
-        Must(AddressService.deletedAddress).to.eql({ _id: 3 });
+        expect(AddressService.addressList.length).to.be(1);
+        expect(AddressService.deletedAddress).to.eql({ _id: 3 });
       });
     });
     describe('get()', function () {
@@ -58,7 +59,7 @@ describe('Services', function () {
           _id: 4
         });
         AddressService.get(4).then(function () {
-          Must(AddressService.address).to.eql({
+          expect(AddressService.address).to.eql({
             name: 'foo',
             _id: 4
           });

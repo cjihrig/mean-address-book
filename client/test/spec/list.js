@@ -1,3 +1,4 @@
+var expect = require('must-dist');
 require('../../components/list/ListController');
 describe('List Controller', function () {
   var controller;
@@ -38,9 +39,9 @@ describe('List Controller', function () {
     it('sets a success message on successful deletion then clears the message', function () {
       controller.deleteAddress({ _id: 5, firstName: 'Walter', lastName: 'White' });
       $rootScope.$digest();
-      Must(mockMessage.message).to.be('Walter White successfully deleted.');
+      expect(mockMessage.message).to.be('Walter White successfully deleted.');
       $timeout.flush();
-      Must(mockMessage.message).to.be.undefined();
+      expect(mockMessage.message).to.be.undefined();
     });
   });
 });

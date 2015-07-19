@@ -1,3 +1,4 @@
+/*global angular*/
 require('../style/main');
 require('./shared/services');
 

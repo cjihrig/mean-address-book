@@ -4,7 +4,7 @@ var Path = require('path');
 var Webpack = require('webpack');
 var Minimist = require('minimist');
 
-var ngPath = Path.join(process.cwd(), 'node_modules', 'angular', 'angular.min.js');
+var ngPath = Path.join(process.cwd(), 'node_modules', 'angular', 'angular.js');
 
 var plugs = [
   new Webpack.optimize.DedupePlugin()
@@ -55,7 +55,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.css', '.html'],
-    modulesDirectories: ['node_modules'],
+    modulesDirectories: ['node_modules']
   },
   plugins: plugs
 };

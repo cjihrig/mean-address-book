@@ -2,7 +2,7 @@ var Path = require('path');
 var Node_Modules = Path.join(process.cwd(), 'node_modules');
 var ngPath = Path.join(Node_Modules, 'angular', 'angular.js');
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     frameworks: ['jasmine', 'must'],
     files: [
@@ -41,7 +41,7 @@ module.exports = function(config) {
       resolve: {
         extensions: ['', '.js'],
         modulesDirectories: ['node_modules']
-      },
+      }
     }
   });
 };

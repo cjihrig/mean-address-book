@@ -1,3 +1,4 @@
+/*global angular*/
 const Services = angular.module('Services', []);
 const AddressService = class AddressService {
   constructor ($http) {
@@ -9,8 +10,7 @@ const AddressService = class AddressService {
     return this.$http.get(`/address/${id}`).then((result) => {
       if (id) {
         this.address = result.data;
-      }
-      else {
+      } else {
         this.addressList = result.data.addresses;
       }
     });

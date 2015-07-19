@@ -1,3 +1,4 @@
+/*global angular*/
 const ListController = class ListController {
   constructor ($route, $timeout, AddressService, MessagingService) {
     this.$route = $route;
