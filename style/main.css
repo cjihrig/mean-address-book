@@ -1,3 +1,7 @@
+div.address-container {
+  min-height: 150px;
+}
+
 div.address-container p {
   margin: 0;
 }

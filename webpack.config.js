@@ -4,7 +4,7 @@ var Path = require('path');
 var Webpack = require('webpack');
 var Minimist = require('minimist');
 
-var ngPath = Path.join(process.cwd() + 'node_modules', 'angular');
+var ngPath = Path.join(process.cwd(), 'node_modules', 'angular', 'angular.js');
 
 var plugs = [
   new Webpack.optimize.DedupePlugin()
@@ -21,12 +21,18 @@ if (args.prod) {
 
 module.exports = {
   entry: {
-    main: ['babel-core/polyfill', './client/main.js']
+    main: ['./client/app.js'],
+    vendor: [
+      'angular',
+      'angular-route',
+      'babel-core/polyfill'
+    ]
   },
   output: {
     path: './public',
-    filename: 'bundle.js'
+    filename: '[name]-bundle.js'
   },
+  devtool: 'source-map',
   module: {
     noParse: [ngPath],
     loaders: [{
