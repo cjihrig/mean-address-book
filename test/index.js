@@ -17,17 +17,19 @@ var address = {
   addressLineTwo: 'Suite 100',
   city: 'Pittsburgh',
   state: 'PA',
-  zip: '15234'
+  zip: '15234',
+  home: true
 };
 
 var address2 = {
-  firstName: 'Pete',
-  lastName: 'Peterson',
+  firstName: 'Sue',
+  lastName: 'Susanson',
   addressLineOne: '789 Xyz Avenue',
   addressLineTwo: '',
   city: 'San Diego',
   state: 'CA',
-  zip: '92118'
+  zip: '92118',
+  home: false
 };
 
 function create (url, address, callback) {
@@ -88,8 +90,13 @@ describe('API', function () {
       create(url + '/address', address, function (err, response, body) {
         expect(err).to.not.exist();
         expect(response.statusCode).to.equal(201);
-        expect(body._id).to.exist();
+        expect(body._id).to.be.a.string();
+        expect(body.created).to.be.a.number();
+        expect(body.updated).to.be.a.number();
+        expect(body.created).to.equal(body.updated);
         delete body._id;
+        delete body.created;
+        delete body.updated;
         expect(body).to.deep.equal(address);
         done();
       });
@@ -154,6 +161,7 @@ describe('API', function () {
         expect(response.statusCode).to.equal(201);
 
         var resource = url + response.headers.location;
+        var createdTime = created.updated;
 
         update(resource, address2, function (err, response, body) {
           expect(err).to.not.exist();
@@ -162,7 +170,10 @@ describe('API', function () {
           get(resource, function (err, response, body) {
             expect(err).to.not.exist();
             expect(response.statusCode).to.equal(200);
+            expect(body.updated).to.not.equal(createdTime);
             delete body._id;
+            delete body.created;
+            delete body.updated;
             expect(body).to.deep.equal(address2);
             done();
           });
