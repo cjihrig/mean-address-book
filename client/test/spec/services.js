@@ -1,3 +1,4 @@
+/*global angular, describe, beforeEach, it, inject*/
 var expect = require('must-dist');
 require('../../shared/services');
 describe('Services', function () {
@@ -5,11 +6,11 @@ describe('Services', function () {
     angular.mock.module('Services');
   });
 
-  var MessagingService
+  var MessagingService;
   describe('MessagingService', function () {
     beforeEach(function () {
       inject(function (_MessagingService_) {
-          MessagingService = _MessagingService_;
+        MessagingService = _MessagingService_;
       });
     });
 
@@ -28,16 +29,16 @@ describe('Services', function () {
     });
   });
   describe('AddressService', function () {
-    var AddressService, $httpBackend
+    var AddressService, $httpBackend;
     beforeEach(function () {
       inject(function (_AddressService_, _$httpBackend_) {
-          AddressService = _AddressService_;
-          $httpBackend = _$httpBackend_;
-          $httpBackend.expectGET('/address/').respond(200, {
-            addresses: [{ _id: 0 }, { _id: 1 }]
-          });
-          $httpBackend.flush();
-          expect(AddressService.addressList).to.eql([{ _id: 0 }, { _id: 1 }]);
+        AddressService = _AddressService_;
+        $httpBackend = _$httpBackend_;
+        $httpBackend.expectGET('/address/').respond(200, {
+          addresses: [{ _id: 0 }, { _id: 1 }]
+        });
+        $httpBackend.flush();
+        expect(AddressService.addressList).to.eql([{ _id: 0 }, { _id: 1 }]);
       });
     });
     describe('delete()', function () {
