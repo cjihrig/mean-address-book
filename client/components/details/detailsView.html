@@ -32,7 +32,13 @@
     <label for="zip">Zip</label>
     <input type="text" class="form-control" id="zip" placeholder="87112" ng-model="details.addressService.address.zip">
   </div>
-  <a class="btn btn-default btn-lg" href="/" role="button">Back</a>
-  <button class="btn btn-default btn-success btn-lg" ng-click="details.updateAddress()">Save</button>
-  <button disabled class="btn btn-default btn-danger btn-lg">Delete</button>
+  <div class="button-bar clearfix">
+    <a class="btn btn-default btn-lg" href="/" role="button">Back</a>
+    <button class="btn btn-default btn-success btn-lg" ng-click="details.updateAddress(details.addressService.address._id)">Save</button>
+    <button class="btn btn-default btn-danger btn-lg"
+      ng-show="details.addressService.address._id"
+      ng-click="details.deleteAddress(details.addressService.address)">
+      Delete
+    </button>
+  </div>
 </form>
