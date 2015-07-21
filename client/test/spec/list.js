@@ -1,13 +1,13 @@
-/*global angular, describe, beforeEach, it, inject, beforeAll*/
-var expect = require('must-dist');
+/*global angular, beforeAll, beforeEach, describe, it, inject*/
+const expect = require('must-dist');
 require('../../components/list/ListController');
 describe('List Controller', function () {
-  var controller;
-  var $q;
-  var $rootScope;
-  var $timeout;
-  var mockAddress = {};
-  var mockMessage = {
+  let controller;
+  let $q;
+  let $rootScope;
+  let $timeout;
+  const mockAddress = {};
+  const mockMessage = {
     setMessage: function (message) {
       this.message = message;
     },
