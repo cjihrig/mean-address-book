@@ -1,35 +1,36 @@
 /*global angular*/
 const DetailsController = class DetailsController {
-  constructor ($timeout, $routeParams, AddressService, MessagingService) {
+  constructor ($timeout, $routeParams, AddressService, MessagingService, $location) {
     this.$timeout = $timeout;
     this.$routeParams = $routeParams;
+    this.$location = $location;
     this.addressService = AddressService;
     this.messagingService = MessagingService;
 
-    if (!this.addressService.address._id) {
+    if (!this.addressService.address._id && this.$routeParams.id) {
       this.addressService.get(this.$routeParams.id);
     }
   }
-  updateAddress () {
+  updateAddress (id) {
     const address = this.addressService.address;
-    this.addressService.update(this.$routeParams.id, address).then(() => {
-      this.messagingService.setMessage(`${address.firstName} ${address.lastName} successfully updated.`);
-      this.$timeout(() => {
-        this.messagingService.reset();
-      }, 2000);
-    });
+
+    if (id) {
+      this.addressService.update(this.$routeParams.id, address);
+    } else {
+      this.addressService.new(address).then((result) => {
+        this.$location.path(`/edit/${result._id}`);
+      });
+    }
   }
   deleteAddress (item) {
     this.addressService.delete(item._id).then(() => {
-      this.messagingService.setMessage(`${item.firstName} ${item.lastName} successfully deleted.`);
-      this.$timeout(() => {
-        this.messagingService.reset();
-      }, 2000);
+      this.addressService.set();
+      this.$location.path('/');
     });
   }
 };
 
-DetailsController.$inject = ['$timeout', '$routeParams', 'AddressService', 'MessagingService'];
+DetailsController.$inject = ['$timeout', '$routeParams', 'AddressService', 'MessagingService', '$location'];
 
 angular.module('DetailsModule', []).controller('DetailsController', DetailsController);
 module.exports = DetailsController;

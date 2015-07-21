@@ -24,16 +24,23 @@ const AddressService = class AddressService {
       if (index !== -1) {
         this.addressList[index] = address;
       }
+      return result;
     });
   }
   delete (id) {
-    return this.$http.delete(`/address/${id}`).then((result) => {
-      this.deletedAddress = result.data;
+    return this.$http.delete(`/address/${id}`).then(() => {
       // The delete was successful, so remove the item from the collection of elements
       const index = this.addressList.findIndex((item) => item._id === id);
       if (index !== -1) {
         this.addressList.splice(index, 1);
       }
+    });
+  }
+  new (address) {
+    return this.$http.post('/address', address).then((result) => {
+      // The add was successful, so add it to the in-memory collection
+      this.addressList.push(result.data);
+      return result.data;
     });
   }
   set (address = {}) {

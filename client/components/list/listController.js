@@ -7,16 +7,15 @@ const ListController = class ListController {
     this.messagingService = MessagingService;
   }
   deleteAddress (item) {
-    this.addressService.delete(item._id).then(() => {
-      this.messagingService.setMessage(`${item.firstName} ${item.lastName} successfully deleted.`);
-      this.$timeout(() => {
-        this.messagingService.reset();
-      }, 2000);
-    });
+    this.addressService.delete(item._id);
   }
   editAddress (item) {
     this.addressService.set(item);
-    this.$location.url(`/${item._id}`);
+    this.$location.url(`/edit/${item._id}`);
+  }
+  newAddress () {
+    this.addressService.set();
+    this.$location.url('/edit/');
   }
 };
 

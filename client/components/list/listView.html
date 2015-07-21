@@ -2,6 +2,9 @@
   <h1>Contacts <span class="badge">{{list.addressService.addressList.length}}</span></h1>
 </div>
 <div>
+  <div class="button-bar row">
+    <button class="btn btn-default btn-primary btn-lg col-md-1 col-xs-12" ng-click="list.newAddress()">New</button>
+  </div>
   <div>
     <div class="alert alert-success" ng-show="list.messagingService.message">
       {{list.messagingService.message}}
