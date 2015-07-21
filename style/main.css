@@ -10,6 +10,9 @@ div.address-container h3 {
   margin-top: 7px;
 }
 
+div.button-bar {
+  margin: 10px 0;
+}
 
 @media screen and (max-width:768px) {
 

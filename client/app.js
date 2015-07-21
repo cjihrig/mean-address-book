@@ -13,7 +13,7 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     controller: list.controller,
     controllerAs: 'list'
   });
-  $routeProvider.when('/:id', {
+  $routeProvider.when('/edit/:id?', {
     template: view.template,
     controller: view.controller,
     controllerAs: 'details'
