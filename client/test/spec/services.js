@@ -1,12 +1,12 @@
-/*global angular, describe, beforeEach, it, inject*/
-var expect = require('must-dist');
+/*global angular, beforeEach, describe, it, inject*/
+const expect = require('must-dist');
 require('../../shared/services');
 describe('Services', function () {
   beforeEach(function () {
     angular.mock.module('Services');
   });
 
-  var MessagingService;
+  let MessagingService;
   describe('MessagingService', function () {
     beforeEach(function () {
       inject(function (_MessagingService_) {
@@ -29,7 +29,7 @@ describe('Services', function () {
     });
   });
   describe('AddressService', function () {
-    var AddressService, $httpBackend;
+    let AddressService, $httpBackend;
     beforeEach(function () {
       inject(function (_AddressService_, _$httpBackend_) {
         AddressService = _AddressService_;
@@ -66,6 +66,23 @@ describe('Services', function () {
           });
         });
         $httpBackend.flush();
+      });
+    });
+    describe('update()', function () {
+      it('sends the update to the server, updates the update time, and updates the in-memory list', function () {
+        const now = Date.now();
+        const address = {
+          _id: 0,
+          firstName: 'Jesse'
+        };
+        $httpBackend.expectPUT('/address/0', address).respond(200, {
+          updated: now,
+          numberUpdated: 1
+        });
+        AddressService.update(0, address);
+        $httpBackend.flush();
+        expect(address.updated).to.equal(now);
+        expect(AddressService.addressList[0].updated).to.equal(now);
       });
     });
   });

@@ -15,6 +15,17 @@ const AddressService = class AddressService {
       }
     });
   }
+  update (id, address) {
+    return this.$http.put(`/address/${id}`, address).then((result) => {
+      address.updated = result.data.updated;
+
+      // The update was successful, so update the in-memory copy
+      const index = this.addressList.findIndex((item) => item._id === id);
+      if (index !== -1) {
+        this.addressList[index] = address;
+      }
+    });
+  }
   delete (id) {
     return this.$http.delete(`/address/${id}`).then((result) => {
       this.deletedAddress = result.data;
@@ -24,6 +35,9 @@ const AddressService = class AddressService {
         this.addressList.splice(index, 1);
       }
     });
+  }
+  set (address = {}) {
+    this.address = address;
   }
   static AddressServiceFactory ($http) {
     const result = new AddressService($http);

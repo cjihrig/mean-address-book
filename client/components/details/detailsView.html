@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h1>{{details.addressService.address.firstName}} {{details.addressService.address.lastName}}</h1>
+</div>
+<form>
+  <div class="form-group">
+    <label for="firstName">First name</label>
+    <input type="text" class="form-control" id="firstName" placeholder="Walter" ng-model="details.addressService.address.firstName">
+  </div>
+  <div class="form-group">
+    <label for="lastName">Last name</label>
+    <input type="text" class="form-control" id="lastName" placeholder="White" ng-model="details.addressService.address.lastName">
+  </div>
+  <div class="form-group">
+    <label for="addressLineOne">Address line one</label>
+    <input type="text" class="form-control" id="addressLineOne" placeholder="3828 Piermont Dr" ng-model="details.addressService.address.addressLineOne">
+  </div>
+  <div class="form-group">
+    <label for="addressLineTwo">Address line two</label>
+    <input type="text" class="form-control" id="addressLineTwo" placeholder="Apt 101" ng-model="details.addressService.address.addressLineTwo">
+  </div>
+  <div class="form-group">
+    <label for="city">City</label>
+    <input type="text" class="form-control" id="city" placeholder="Albuquerque" ng-model="details.addressService.address.city">
+  </div>
+  <div class="form-group">
+    <label for="state">State</label>
+    <input type="text" class="form-control" id="state" placeholder="NM" ng-model="details.addressService.address.state">
+  </div>
+  <div class="form-group">
+    <label for="zip">Zip</label>
+    <input type="text" class="form-control" id="zip" placeholder="87112" ng-model="details.addressService.address.zip">
+  </div>
+  <a class="btn btn-default btn-lg" href="/" role="button">Back</a>
+  <button class="btn btn-default btn-success btn-lg" ng-click="details.updateAddress()">Save</button>
+  <button disabled class="btn btn-default btn-danger btn-lg">Delete</button>
+</form>
