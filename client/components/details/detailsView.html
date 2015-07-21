@@ -24,7 +24,9 @@
   </div>
   <div class="form-group">
     <label for="state">State</label>
-    <input type="text" class="form-control" id="state" placeholder="NM" ng-model="details.addressService.address.state">
+    <select id="state" class="form-control" ng-model="details.addressService.address.state" ng-options="state for state in details.states track by state">
+      <option value="">Select state...</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="zip">Zip</label>
