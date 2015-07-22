@@ -5,16 +5,23 @@ const ListController = class ListController {
     this.$location = $location;
     this.addressService = AddressService;
     this.messagingService = MessagingService;
+
+    this.addressService.get().then((result) => {
+      this.addressList = result.data.addresses;
+    });
   }
   deleteAddress (item) {
-    this.addressService.delete(item._id);
+    this.addressService.delete(item._id).then(() => {
+      const index = this.addressList.findIndex((address) => address._id === item._id);
+      if (index !== -1) {
+        this.addressList.splice(index, 1);
+      }
+    });
   }
   editAddress (item) {
-    this.addressService.set(item);
     this.$location.url(`/edit/${item._id}`);
   }
   newAddress () {
-    this.addressService.set();
     this.$location.url('/edit/');
   }
 };
