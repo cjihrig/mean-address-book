@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Contacts <span class="badge">{{list.addressService.addressList.length}}</span></h1>
+  <h1>Contacts <span class="badge">{{list.addressList.length}}</span></h1>
 </div>
 <div>
   <div class="button-bar row">
@@ -14,7 +14,7 @@
     </div>
   </div>
   <div class="row">
-    <div ng-repeat="item in list.addressService.addressList track by item._id">
+    <div ng-repeat="item in list.addressList track by item._id">
       <div class="col-md-6 col-sm-12">
         <div class="panel panel-default address-container">
           <div class="panel-heading">
@@ -24,7 +24,7 @@
               </div>
               <div class="col-md-3 col-xs-6 text-right">
                 <div class="btn-group list-action-btn-group">
-                  <button class="btn btn-default btn-primary glyphicon glyphicon-pencil" ng-click="list.editAddress(item)"></button>
+                  <a href="/edit/{{item._id}}" class="btn btn-default btn-primary glyphicon glyphicon-pencil"></a>
                   <button class="btn btn-default btn-danger glyphicon glyphicon-trash" ng-click="list.deleteAddress(item)"></button>
                 </div>
               </div>

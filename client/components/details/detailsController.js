@@ -7,25 +7,25 @@ const DetailsController = class DetailsController {
     this.addressService = AddressService;
     this.messagingService = MessagingService;
     this.states = STATES;
+    this.address = {};
 
-    if (!this.addressService.address._id && this.$routeParams.id) {
-      this.addressService.get(this.$routeParams.id);
+    if (this.$routeParams.id) {
+      this.addressService.get(this.$routeParams.id).then((result) => {
+        this.address = result.data;
+      });
     }
   }
   updateAddress (id) {
-    const address = this.addressService.address;
-
     if (id) {
-      this.addressService.update(this.$routeParams.id, address);
+      this.addressService.update(this.$routeParams.id, this.address);
     } else {
-      this.addressService.new(address).then((result) => {
-        this.$location.path(`/edit/${result._id}`);
+      this.addressService.new(this.address).then((result) => {
+        this.$location.path(`/edit/${result.data._id}`);
       });
     }
   }
   deleteAddress (item) {
     this.addressService.delete(item._id).then(() => {
-      this.addressService.set();
       this.$location.path('/');
     });
   }
