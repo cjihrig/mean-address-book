@@ -16,12 +16,14 @@ const DetailsController = class DetailsController {
     }
   }
   updateAddress (id) {
-    if (id) {
-      this.addressService.update(this.$routeParams.id, this.address);
-    } else {
-      this.addressService.new(this.address).then((result) => {
-        this.$location.path(`/edit/${result.data._id}`);
-      });
+    if (this.updateForm.$valid) {
+      if (id) {
+        this.addressService.update(this.$routeParams.id, this.address);
+      } else {
+        this.addressService.new(this.address).then((result) => {
+          this.$location.path(`/edit/${result.data._id}`);
+        });
+      }
     }
   }
   deleteAddress (item) {
