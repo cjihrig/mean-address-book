@@ -1,5 +1,6 @@
 div.address-container {
-  min-height: 150px;
+  height: 175px;
+  position: relative;
 }
 
 div.address-container p {
@@ -12,6 +13,22 @@ div.address-container h3 {
 
 div.button-bar {
   margin: 10px 0;
+}
+
+div.address-container div.time-container {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 0 10px 10px 0;
+  font-size: 13px;
+  font-style: italic;
+  color: rgb(190, 190, 190);
+}
+
+div.detail-time-container {
+  text-align: right;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 @media screen and (max-width:768px) {

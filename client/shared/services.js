@@ -8,7 +8,10 @@ const AddressService = class AddressService {
     return this.$http.get(`/address/${id}`);
   }
   update (id, address) {
-    return this.$http.put(`/address/${id}`, address);
+    return this.$http.put(`/address/${id}`, address).then((result) => {
+      address.updated = result.data.updated;
+      return address;
+    });
   }
   delete (id) {
     return this.$http.delete(`/address/${id}`);
