@@ -1,36 +1,47 @@
 <div class="page-header">
   <h1>{{details.address.firstName}} {{details.address.lastName}}</h1>
 </div>
-<form>
+<form name="details.updateForm">
   <div class="form-group">
     <label for="firstName">First name</label>
-    <input type="text" class="form-control" id="firstName" placeholder="Walter" ng-model="details.address.firstName">
+    <input type="text" class="form-control" id="firstName" placeholder="Walter"
+    ng-model="details.address.firstName" ng-required="true">
   </div>
   <div class="form-group">
     <label for="lastName">Last name</label>
-    <input type="text" class="form-control" id="lastName" placeholder="White" ng-model="details.address.lastName">
+    <input type="text" class="form-control" id="lastName" placeholder="White"
+    ng-model="details.address.lastName" ng-required="true">
   </div>
   <div class="form-group">
     <label for="addressLineOne">Address line one</label>
-    <input type="text" class="form-control" id="addressLineOne" placeholder="3828 Piermont Dr" ng-model="details.address.addressLineOne">
+    <input type="text" class="form-control" id="addressLineOne" placeholder="3828 Piermont Dr"
+    ng-model="details.address.addressLineOne" ng-required="true">
   </div>
   <div class="form-group">
     <label for="addressLineTwo">Address line two</label>
-    <input type="text" class="form-control" id="addressLineTwo" placeholder="Apt 101" ng-model="details.address.addressLineTwo">
+    <input type="text" class="form-control" id="addressLineTwo" placeholder="Apt 101"
+    ng-model="details.address.addressLineTwo" ng-required="true">
   </div>
   <div class="form-group">
     <label for="city">City</label>
-    <input type="text" class="form-control" id="city" placeholder="Albuquerque" ng-model="details.address.city">
+    <input type="text" class="form-control" id="city" placeholder="Albuquerque"
+    ng-model="details.address.city" ng-required="true">
   </div>
   <div class="form-group">
     <label for="state">State</label>
-    <select id="state" class="form-control" ng-model="details.address.state" ng-options="state for state in details.states track by state">
+    <select id="state" class="form-control"
+    ng-model="details.address.state"
+    ng-options="state for state in details.states track by state"
+    ng-required="true">
       <option value="">Select state...</option>
     </select>
   </div>
   <div class="form-group">
     <label for="zip">Zip</label>
-    <input type="text" class="form-control" id="zip" placeholder="87112" ng-model="details.address.zip">
+    <input type="text" class="form-control" id="zip" placeholder="87112"
+    ng-model="details.address.zip"
+    ng-required="true"
+    ng-pattern="/^\d{5}$/">
   </div>
   <div class="button-bar clearfix">
     <a class="btn btn-default btn-lg" href="/" role="button">Back</a>
