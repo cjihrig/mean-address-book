@@ -34,11 +34,26 @@ const AddressService = class AddressService {
       return result;
     });
   }
-  static AddressServiceFactory ($http, $rootScope) {
-    return new AddressService($http, $rootScope);
+};
+
+AddressService.$inject = ['$http', '$rootScope'];
+Services.service('AddressService', AddressService);
+
+const ErrorInterceptor = class ErrorInterceptor {
+  constructor ($q, $rootScope) {
+    this.$q = $q;
+    this.$rootScope = $rootScope;
+
+    // Need to do this because responseError is called from Angular and the context isn't corrected handled.
+    this.responseError = (rejection) => {
+      if (rejection.status >= 401) {
+        this.$rootScope.$emit('error', `There was an error during the $http request - ${rejection.config.method} ${rejection.config.url}.\n
+        DATA[${rejection.data.substring(0, 100)}...]`);
+      }
+      return this.$q.reject(rejection);
+    };
   }
 };
 
-AddressService.AddressServiceFactory.$inject = ['$http', '$rootScope'];
-
-Services.service('AddressService', AddressService.AddressServiceFactory);
+ErrorInterceptor.$inject = ['$q', '$rootScope'];
+Services.service('errorInterceptor', ErrorInterceptor);
