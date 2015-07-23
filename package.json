@@ -4,10 +4,10 @@
   "description": "MEAN Stack Address Book",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run webpack & nodemon --watch lib --watch index.js index.js",
+    "dev": "npm run webpack & nodemon --watch lib --watch index.js --exec babel-node -- index.js",
     "lint": "semistandard",
-    "start": "node index.js",
-    "test": "npm run lint && lab -v -a code",
+    "start": "babel-node index.js",
+    "test": "npm run lint && lab -T test/transform.js -v -a code",
     "test-client": "semistandard && karma start",
     "webpack": "webpack -w -v",
     "webpack-p": "webpack -v --prod"
@@ -15,6 +15,7 @@
   "author": "Continuation Labs <contact@continuation.io> (http://continuation.io/)",
   "license": "MIT",
   "dependencies": {
+    "babel": "5.8.3",
     "body-parser": "1.13.2",
     "express": "4.13.1",
     "serve-favicon": "2.3.0",
