@@ -1,17 +1,17 @@
 'use strict';
-var lib = require('./lib');
+const lib = require('./lib');
 
-lib.init(function (err, app) {
+lib.init((err, app) => {
   if (err) {
     console.error('Could not connect to database');
     process.exit(1);
   }
 
-  var server = app.listen(9001, function () {
-    var address = server.address();
-    var host = address.address;
-    var port = address.port;
+  const server = app.listen(9001, () => {
+    const address = server.address();
+    const host = address.address;
+    const port = address.port;
 
-    console.log('Server listening at http://%s:%s', host, port);
+    console.log(`Server listening at http://${host}:${port}`);
   });
 });
