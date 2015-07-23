@@ -31,6 +31,18 @@ div.detail-time-container {
   font-weight: bold;
 }
 
+div.status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(222, 222, 222, 0.55);
+  z-index: 100;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
 @media screen and (max-width:768px) {
 
 }

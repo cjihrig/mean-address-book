@@ -5,14 +5,6 @@
   <div class="button-bar row">
     <button class="btn btn-default btn-primary btn-lg col-md-1 col-xs-12" ng-click="list.newAddress()">New</button>
   </div>
-  <div>
-    <div class="alert alert-success" ng-show="list.messagingService.message">
-      {{list.messagingService.message}}
-    </div>
-    <div class="alert alert-danger" ng-show="list.messagingService.error">
-      {{list.messagingService.error}}
-    </div>
-  </div>
   <div class="row">
     <div ng-repeat="item in list.addressList track by item._id">
       <div class="col-md-6 col-sm-12">

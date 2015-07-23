@@ -4,7 +4,7 @@ require('./shared');
 
 const list = require('./components/list');
 const view = require('./components/details');
-const App = angular.module('App', ['ngRoute', 'ListModule', 'DetailsModule', 'Services', 'Directives']);
+const App = angular.module('App', ['ngRoute', 'ListModule', 'DetailsModule', 'Services', 'Directives', 'SharedControllers']);
 
 App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);

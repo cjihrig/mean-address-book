@@ -1,10 +1,9 @@
 /*global angular*/
 const ListController = class ListController {
-  constructor ($timeout, $location, AddressService, MessagingService) {
+  constructor ($timeout, $location, AddressService) {
     this.$timeout = $timeout;
     this.$location = $location;
     this.addressService = AddressService;
-    this.messagingService = MessagingService;
 
     this.addressService.get().then((result) => {
       this.addressList = result.data.addresses;
@@ -26,7 +25,7 @@ const ListController = class ListController {
   }
 };
 
-ListController.$inject = ['$timeout', '$location', 'AddressService', 'MessagingService'];
+ListController.$inject = ['$timeout', '$location', 'AddressService'];
 
 angular.module('ListModule', []).controller('ListController', ListController);
 module.exports = ListController;
