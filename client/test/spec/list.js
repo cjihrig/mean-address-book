@@ -1,7 +1,7 @@
 /*global angular, beforeAll, beforeEach, describe, it, inject*/
 const expect = require('must-dist');
 require('../../components/list/ListController');
-describe('List Controller', function () {
+xdescribe('List Controller', function () {
   let controller;
   let $q;
   let $rootScope;
