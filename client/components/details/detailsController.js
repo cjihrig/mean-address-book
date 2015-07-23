@@ -1,11 +1,10 @@
 /*global angular*/
 const DetailsController = class DetailsController {
-  constructor ($timeout, $routeParams, AddressService, MessagingService, $location, STATES) {
+  constructor ($timeout, $routeParams, AddressService, $location, STATES) {
     this.$timeout = $timeout;
     this.$routeParams = $routeParams;
     this.$location = $location;
     this.addressService = AddressService;
-    this.messagingService = MessagingService;
     this.states = STATES;
     this.address = {};
 
@@ -33,7 +32,7 @@ const DetailsController = class DetailsController {
   }
 };
 
-DetailsController.$inject = ['$timeout', '$routeParams', 'AddressService', 'MessagingService', '$location', 'STATES'];
+DetailsController.$inject = ['$timeout', '$routeParams', 'AddressService', '$location', 'STATES'];
 
 angular.module('DetailsModule', []).controller('DetailsController', DetailsController);
 module.exports = DetailsController;
