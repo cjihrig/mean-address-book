@@ -3,7 +3,8 @@ const MessageController = class MessageController {
   constructor ($rootScope, $timeout) {
     this.$rootScope = $rootScope;
     this.$timeout = $timeout;
-    this.message = this.error = null;
+    this.message = null;
+    this.error = null;
 
     $rootScope.$on('message', (event, message) => {
       this._message('message', message);
@@ -12,11 +13,11 @@ const MessageController = class MessageController {
       this._message('error', error);
     });
   }
-  _message(type, content) {
+  _message (type, content) {
     this[type] = content;
     this.$timeout(() => {
       this[type] = null;
-    }, 2000);
+    }, 10000);
   }
 };
 

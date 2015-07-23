@@ -10,8 +10,7 @@ const AddressService = class AddressService {
       const data = result.data;
       if (data._id) {
         this.$rootScope.$emit('message', `${data.firstName} ${data.lastName} successfully retrieved.`);
-      }
-      else {
+      } else {
         this.$rootScope.$emit('message', `${data.addresses.length} addresses successfully retrieved.`);
       }
       return result;

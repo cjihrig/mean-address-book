@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
     <body ng-app="App">
-        <div class="status-bar" ng-controller="MessageController as stat" ng-class="{'text-success': stat.message, 'text-danger': stat.error}">
-            <span>{{stat.message || state.error}}</span>
+        <div class="status-bar" ng-controller="MessageController as state" ng-class="{'text-success': state.message, 'text-danger': state.error}">
+            <span>{{state.message || state.error}}</span>
         </div>
         <div class="container">
             <div ng-view></div>
