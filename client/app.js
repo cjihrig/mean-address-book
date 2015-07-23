@@ -4,21 +4,9 @@ require('./shared');
 
 const list = require('./components/list');
 const view = require('./components/details');
-const App = angular.module('App', ['ngRoute', 'ListModule', 'DetailsModule', 'Services', 'Directives', 'SharedControllers']);
+const App = angular.module('App', ['ngRoute', 'DetailsModule', 'Directives', 'ListModule', 'Services', 'SharedControllers']);
 
-App.factory('errorInterceptor', ['$q', '$rootScope', function ($q, $rootScope) {
-  return {
-    responseError: function (rejection) {
-      if (rejection.status >= 401) {
-        $rootScope.$emit('error', `There was an error during the $http request - ${rejection.config.method} ${rejection.config.url}.\n
-        DATA[${rejection.data.substring(0, 100)}...]`);
-      }
-      return $q.reject(rejection);
-    }
-  };
-}]);
-
-App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+const configureApp = function ($routeProvider, $locationProvider, $httpProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider.when('/', {
     template: list.template,
@@ -30,11 +18,13 @@ App.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     controller: view.controller,
     controllerAs: 'details'
   });
-}]);
-
-App.config(['$httpProvider', function ($httpProvider) {
+  $routeProvider.otherwise({
+    redirectTo: '/'
+  });
   $httpProvider.interceptors.push('errorInterceptor');
-}]);
+};
+configureApp.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
+App.config(configureApp);
 
 App.constant('STATES', ['AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA', 'HI', 'ID',
   'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV',

@@ -17,7 +17,7 @@ const MessageController = class MessageController {
     this[type] = content;
     this.$timeout(() => {
       this[type] = null;
-    }, 10000);
+    }, 5000);
   }
 };
 
