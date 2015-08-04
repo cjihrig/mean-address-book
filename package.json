@@ -8,7 +8,7 @@
     "lint": "semistandard",
     "start": "babel-node index.js",
     "test": "npm run lint && lab -T test/transform.js -v -a code",
-    "test-client": " karma start",
+    "test-client": "npm run lint && karma start",
     "webpack": "webpack -w -v",
     "webpack-p": "webpack -v --prod"
   },

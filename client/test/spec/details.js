@@ -3,13 +3,13 @@ const expect = require('must-dist');
 const module = angular.mock.module;
 require('../../components/details/detailsController');
 describe('Details Controller', () => {
+  let detailsController;
+  const mockAddress = {};
+
+  let $controller;
+  let $location;
   let $rootScope;
   let $routeParams;
-  let $controller;
-  let detailsController;
-  let $q;
-  let $location;
-  const mockAddress = {};
 
   beforeEach(() => {
     module('ngRoute');
@@ -19,11 +19,11 @@ describe('Details Controller', () => {
       $provide.value('AddressService', mockAddress);
     });
 
-    inject((_$controller_, _$routeParams_, $q, _$rootScope_, _$location_) => {
-      $routeParams = _$routeParams_;
+    inject(($q, _$controller_, _$location_, _$rootScope_, _$routeParams_) => {
       $controller = _$controller_;
-      $rootScope = _$rootScope_;
       $location = _$location_;
+      $rootScope = _$rootScope_;
+      $routeParams = _$routeParams_;
 
       mockAddress.get = (id) => {
         return $q((resolve, reject) => {
@@ -80,7 +80,7 @@ describe('Details Controller', () => {
         _id: 4,
         firstName: 'Walter',
         secondName: 'White'
-      }
+      };
 
       detailsController.updateAddress(4);
 
