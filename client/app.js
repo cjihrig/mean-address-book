@@ -21,7 +21,7 @@ const configureApp = function ($routeProvider, $locationProvider, $httpProvider)
   $routeProvider.otherwise({
     redirectTo: '/'
   });
-  $httpProvider.interceptors.push('errorInterceptor');
+  $httpProvider.interceptors.push('ErrorInterceptor');
 };
 configureApp.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
 App.config(configureApp);
