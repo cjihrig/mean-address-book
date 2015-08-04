@@ -1,7 +1,6 @@
 /*global angular*/
 const DetailsController = class DetailsController {
-  constructor ($timeout, $routeParams, AddressService, $location, STATES) {
-    this.$timeout = $timeout;
+  constructor ($routeParams, AddressService, $location, STATES) {
     this.$routeParams = $routeParams;
     this.$location = $location;
     this.addressService = AddressService;
@@ -17,7 +16,7 @@ const DetailsController = class DetailsController {
   updateAddress (id) {
     if (this.updateForm.$valid) {
       if (id) {
-        this.addressService.update(this.$routeParams.id, this.address);
+        this.addressService.update(id, this.address);
       } else {
         this.addressService.new(this.address).then((result) => {
           this.$location.path(`/edit/${result.data._id}`);
@@ -32,7 +31,7 @@ const DetailsController = class DetailsController {
   }
 };
 
-DetailsController.$inject = ['$timeout', '$routeParams', 'AddressService', '$location', 'STATES'];
+DetailsController.$inject = ['$routeParams', 'AddressService', '$location', 'STATES'];
 
 angular.module('DetailsModule', []).controller('DetailsController', DetailsController);
 module.exports = DetailsController;

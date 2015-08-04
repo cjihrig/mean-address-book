@@ -1,9 +1,10 @@
 /*global angular, beforeEach, describe, it, inject, spyOn*/
 const expect = require('must-dist');
+const module = angular.mock.module;
 require('../../shared/services');
 describe('Services', () => {
   beforeEach(() => {
-    angular.mock.module('Services');
+    module('Services');
   });
 
   describe('AddressService', () => {
@@ -96,6 +97,35 @@ describe('Services', () => {
         expect($rootScope.$emit.calls.mostRecent().args[0]).to.be('message');
         expect($rootScope.$emit.calls.mostRecent().args[1]).to.be('Jesse Pinkman successfully updated.');
       });
+    });
+  });
+
+  describe('ErrorInterceptor', () => {
+    let ErrorInterceptor, $rootScope, $q;
+    beforeEach(() => {
+      inject((_ErrorInterceptor_, _$rootScope_, _$q_) => {
+        ErrorInterceptor = _ErrorInterceptor_;
+        $rootScope = _$rootScope_;
+        $q = _$q_;
+
+        spyOn($rootScope, '$emit');
+        spyOn($q, 'reject');
+      });
+    });
+    it('catches >= 401 status codes and emits an error message.', () => {
+      const rejection = {
+        status: 401,
+        data: 'mock 401',
+        config: {
+          method: 'GET',
+          url: 'http://localhost:9001/api'
+        }
+      };
+
+      ErrorInterceptor.responseError(rejection);
+      expect($rootScope.$emit.calls.mostRecent().args[0]).to.be('error');
+      expect($rootScope.$emit.calls.mostRecent().args[1]).to.be(`There was an error during the $http request - ${rejection.config.method} ${rejection.config.url}.\nDATA[${rejection.data}...]`);
+      expect($q.reject.calls.mostRecent().args[0]).to.equal(rejection);
     });
   });
 });

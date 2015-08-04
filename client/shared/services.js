@@ -44,11 +44,10 @@ const ErrorInterceptor = class ErrorInterceptor {
     this.$q = $q;
     this.$rootScope = $rootScope;
 
-    // Need to do this because responseError is called from Angular and the context isn't corrected handled.
+    // Need to attach directly to "this" because responseError is called from Angular and the context isn't correctly handled if responseError is on the prototype.
     this.responseError = (rejection) => {
       if (rejection.status >= 401) {
-        this.$rootScope.$emit('error', `There was an error during the $http request - ${rejection.config.method} ${rejection.config.url}.\n
-        DATA[${rejection.data.substring(0, 100)}...]`);
+        this.$rootScope.$emit('error', `There was an error during the $http request - ${rejection.config.method} ${rejection.config.url}.\nDATA[${rejection.data.substring(0, 100)}...]`);
       }
       return this.$q.reject(rejection);
     };
@@ -56,4 +55,4 @@ const ErrorInterceptor = class ErrorInterceptor {
 };
 
 ErrorInterceptor.$inject = ['$q', '$rootScope'];
-Services.service('errorInterceptor', ErrorInterceptor);
+Services.service('ErrorInterceptor', ErrorInterceptor);
