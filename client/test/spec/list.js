@@ -7,14 +7,6 @@ xdescribe('List Controller', function () {
   let $rootScope;
   let $timeout;
   const mockAddress = {};
-  const mockMessage = {
-    setMessage: function (message) {
-      this.message = message;
-    },
-    reset: function () {
-      this.message = undefined;
-    }
-  };
   beforeEach(function () {
     angular.mock.module('ngRoute');
     angular.mock.module('ListModule');

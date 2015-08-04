@@ -14,39 +14,45 @@ describe('Details Controller', () => {
   beforeEach(() => {
     module('ngRoute');
     module('DetailsModule');
-    module(function ($provide) {
+    module(($provide) => {
       $provide.value('STATES', ['AL', 'AK', 'AZ', 'AR']);
       $provide.value('AddressService', mockAddress);
     });
 
-    inject(function (_$controller_, _$routeParams_, $q, _$rootScope_, _$location_) {
+    inject((_$controller_, _$routeParams_, $q, _$rootScope_, _$location_) => {
       $routeParams = _$routeParams_;
       $controller = _$controller_;
       $rootScope = _$rootScope_;
       $location = _$location_;
 
-      mockAddress.get = function (id) {
-        return $q(function (resolve, rejct) {
+      mockAddress.get = (id) => {
+        return $q((resolve, reject) => {
           return resolve({ data: id });
         });
       };
-      mockAddress.update = function (id, data) {
-        return $q(function (resolve, rejct) {
+      mockAddress.update = (id, data) => {
+        return $q((resolve, reject) => {
           return resolve(id, data);
         });
       };
-      mockAddress.new = function (address) {
-        return $q(function (resolve, rejct) {
+      mockAddress.new = (address) => {
+        return $q((resolve, reject) => {
           address._id = 42;
           return resolve({
             data: address
           });
         });
       };
+      mockAddress.delete = (id) => {
+        return $q((resolve, reject) => {
+          return resolve();
+        });
+      };
 
       spyOn(mockAddress, 'get').and.callThrough();
       spyOn(mockAddress, 'update').and.callThrough();
       spyOn(mockAddress, 'new').and.callThrough();
+      spyOn(mockAddress, 'delete').and.callThrough();
       spyOn($location, 'path');
     });
   });
@@ -102,6 +108,14 @@ describe('Details Controller', () => {
       });
       $rootScope.$digest();
       expect($location.path.calls.mostRecent().args[0]).to.equal('/edit/42');
+    });
+  });
+  describe('deleteAddress()', () => {
+    it('calls the delete method of the AddressService and navigates the user to /', () => {
+      detailsController = $controller('DetailsController');
+      detailsController.deleteAddress({ _id: 99 });
+      $rootScope.$digest();
+      expect(mockAddress.delete.calls.mostRecent().args[0]).to.equal(99);
     });
   });
 });
